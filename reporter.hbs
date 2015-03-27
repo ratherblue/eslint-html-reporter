@@ -1,0 +1,66 @@
+<style type="text/css">
+  .report-table {
+    font-family: "Helvetica Neue", sans-serif;
+    font-size: 12px;
+    border-collapse: collapse;
+  }
+
+  .report-table + .report-table {
+    margin-top: 12px;
+  }
+
+  .report-table thead {
+    background-color: #eee;
+  }
+
+  .report-table th {
+    text-align: left;
+    vertical-align: middle;
+  }
+
+  .report-table th,
+  .report-table td {
+    padding: 4px 6px;
+    border: 1px solid #e6e6e6;
+  }
+
+  .report-table tbody tr:hover {
+    background-color: #efefef;
+  }
+
+  .report-table td {
+    line-height: 1.5;
+    vertical-align: top;
+  }
+
+</style>
+
+{{#each results}}
+  <table class="report-table">
+    <thead>
+      <tr>
+        <th colspan="4">{{filePath}}</th>
+      </tr>
+      <tr>
+        <th>Severity</th>
+        <th>Rule Id</th>
+        <th>Source</th>
+        <th>Details</th>
+      </tr>
+    </thead>
+    <tbody>
+      {{#each messages}}
+        <tr>
+          <td class="severity-{{severity}}">{{severity}}</td>
+          <td>{{ruleId}}</td>
+          <td>{{source}}</td>
+          <td>
+            Message: {{message}}<br>
+            Line {{line}}, column {{column}}<br>
+            Node type: {{nodeType}}
+          </td>
+        </tr>
+      {{/each}}
+    </tbody>
+  </table>
+{{/each}}
