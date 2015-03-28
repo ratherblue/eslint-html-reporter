@@ -25,11 +25,7 @@ module.exports = function (results, config) {
     }
   );
 
-  //console.log(data);
-
   var html = template(JSON.parse(data));
 
-  //fs.writeFileSync('./report.html', html);
-
-  return template(JSON.parse(data));
+  return html;
 };
