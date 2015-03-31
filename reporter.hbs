@@ -59,6 +59,37 @@
     vertical-align: top;
   }
 
+  .table-wrapper {
+    display: flex;
+    justify-content: flex-start;
+    width: 500px;
+    align-items: flex-end;
+  }
+
+  .table-column {
+    flex: 1;
+    margin: 10px;
+  }
+
+  .summary-table {
+    border-spacing: 0;
+    border-collapse: collapse;
+    width: 100%;
+  }
+
+  .summary-table td {
+    padding: 4px 9px;
+  }
+
+  .summary-table td:last-child {
+    text-align: right;
+  }
+
+  .summary-table tfoot td {
+    border-top: 2px solid #666;
+    font-weight: bold;
+  }
+
   .danger td {
     background-color: #f2dede;
   }
@@ -78,25 +109,6 @@
 
   {{> summary summary}}
 
-  <h2>File Breakdown</h2>
-
-  <table class="report-table">
-    <thead>
-      <tr>
-        <th>File</th>
-        <th>Errors</th>
-        <th>Warnings</th>
-      </tr>
-    </thead>
-    <tbody>
-      {{#each fileSummary}}
-        {{#row this}}
-          <td>{{file}}</td>
-          <td>{{errors}}</td>
-          <td>{{warnings}}</td>
-        {{/row}}
-      {{/each}}
-    </tbody>
-  </table>
+  {{>fileBreakdown files}}
 
 </div>

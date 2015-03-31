@@ -1,0 +1,20 @@
+<h2>File Breakdown</h2>
+
+<table class="report-table">
+  <thead>
+    <tr>
+      <th>File</th>
+      <th>Errors</th>
+      <th>Warnings</th>
+    </tr>
+  </thead>
+  <tbody>
+    {{#each this}}
+      {{#row this}}
+        <td>{{path}}</td>
+        <td>{{errors}}</td>
+        <td>{{warnings}}</td>
+      {{/row}}
+    {{/each}}
+  </tbody>
+</table>

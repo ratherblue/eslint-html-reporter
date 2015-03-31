@@ -1,0 +1,52 @@
+<h2>Summary</h2>
+
+<div class="table-wrapper">
+  <div class="table-column">
+    <table class="summary-table">
+      {{#with alerts}}
+        <tbody>
+          <tr>
+            <td>Errors</td>
+            <td>{{errors}}</td>
+          </tr>
+          <tr>
+            <td>Warnings</td>
+            <td>{{warnings}}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>Total alerts</td>
+            <td>{{total}}</td>
+          </tr>
+        </tfoot>
+      {{/with}}
+    </table>
+  </div>
+  <div class="table-column">
+    <table class="summary-table">
+      {{#with files}}
+        <tbody>
+          <tr>
+            <td>Files with errors</td>
+            <td>{{errors}}</td>
+          </tr>
+          <tr>
+            <td>Files with only warnings</td>
+            <td>{{warnings}}</td>
+          </tr>
+          <tr>
+            <td>Clean files</td>
+            <td>{{clean}}</td>
+          </tr>
+        </tbody>
+        <tfoot>
+          <tr>
+            <td>Total files linted</td>
+            <td>{{total}}</td>
+          </tr>
+        </tfoot>
+      {{/with}}
+    </table>
+  </div>
+</div>

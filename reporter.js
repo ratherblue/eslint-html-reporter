@@ -1,103 +1,148 @@
-var handlebars = require('handlebars');
-var fs = require('fs');
-var path = require('path');
+/**
+ * @fileoverview HTML reporter
+ * @author Evangelia Dendramis
+ */
+"use strict";
 
-module.exports = function (results, config) {
-  'use strict';
+var handlebars = require("handlebars");
+var fs         = require("fs");
+var path       = require("path");
 
-  // fetch and compile template
-  var source = fs.readFileSync(path.join(__dirname, 'reporter.hbs'),
-    { encoding: 'utf-8' }
+//------------------------------------------------------------------------------
+// Helper Functions
+//------------------------------------------------------------------------------
+
+/**
+ * Sorting function
+ * @param {object} a
+ * @param {object} b
+ * @returns {int}
+ */
+function sortSummary(a, b) {
+  return (b.errors - a.errors);
+}
+
+/**
+ * Handlebars helper
+ * @param {object} context
+ * @param {object} options
+ * @returns {string}
+ */
+function rowHelper(context, options) {
+  var className = "success";
+
+  if (context.errors) {
+    className = "danger";
+  } else if (context.warnings) {
+    className = "warning";
+  }
+
+  return "<tr class=\"" + className + "\">" + options.fn(this) + "</tr>";
+}
+
+/**
+ * Apply handlebars template to data
+ * @param {object} data
+ * @returns {string}
+ */
+function applyTemplate(data) {
+  registerHelpers();
+  registerPartials();
+
+  var source = fs.readFileSync(path.join(__dirname, "reporter.hbs"),
+    { encoding: "utf-8" }
   );
-
-  var summaryTemplate = fs.readFileSync(path.join(__dirname, 'summary.hbs'),
-    { encoding: 'utf-8' }
-  );
-
-  handlebars.registerPartial('summary', handlebars.compile(summaryTemplate));
-
-  handlebars.registerHelper('row', function(context, options) {
-
-    var className = '';
-
-    console.log(context);
-
-    if (context.errors) {
-      className = 'danger';
-    } else if (context.warnings) {
-      className = 'warning';
-    } else {
-      className = 'success';
-    }
-
-    return '<tr class="' + className + '">' + options.fn(this) + '</tr>';
-  });
 
   var template = handlebars.compile(source);
-  //var summary = handles.compile(summaryTemplate);
 
-  var data = JSON.stringify(
-    {
-      config: config,
-      results: results
-    },
-    function (key, val) {
-      // filter away the Esprima AST
-      if (key !== 'node') {
-        return val;
-      }
-    }
+  return template(data);
+}
+
+/**
+ * Register Handlebars partials
+ */
+function registerPartials() {
+  var summary = fs.readFileSync(path.join(__dirname, "partials", "summary.hbs"),
+    { encoding: "utf-8" }
   );
 
-  data = JSON.parse(data);
+  handlebars.registerPartial("summary", handlebars.compile(summary));
 
+  var fileBreakdown = fs.readFileSync(path.join(__dirname, "partials", "file-breakdown.hbs"),
+    { encoding: "utf-8" }
+  );
+
+  handlebars.registerPartial("fileBreakdown", handlebars.compile(fileBreakdown));
+}
+
+/**
+ * Register Handlebars helpers
+ */
+ function registerHelpers() {
+   handlebars.registerHelper("row", rowHelper);
+ }
+
+//------------------------------------------------------------------------------
+// Public Interface
+//------------------------------------------------------------------------------
+module.exports = function (results) {
 
   // summarize messages
   var summary = {
-    files: results.length,
-    messages: 0,
-    errors: 0,
-    warnings: 0
+    alerts: {
+      errors: 0,
+      warnings: 0,
+      total: 0
+    },
+    files: {
+      errors: 0,
+      warnings: 0,
+      clean: 0,
+      total: 0
+    },
+    errorTypes: {}
   };
 
-  var fileSummary = [];
+  var files = [];
 
   results.forEach(function(result) {
     var messages = result.messages;
 
-    summary.messages += messages.length;
+    summary.alerts.total += messages.length;
 
-    var fileData = {
-      file: result.filePath,
+    var file = {
+      path: result.filePath,
       errors: 0,
       warnings: 0
     };
 
     messages.forEach(function(message) {
       if (message.severity === 2) {
-        summary.errors += 1;
-        fileData.errors += 1;
+        summary.alerts.errors++;
+        file.errors++;
       } else if (message.severity === 1) {
-        summary.warnings += 1;
-        fileData.warnings += 1;
+        summary.alerts.warnings++;
+        file.warnings++;
       }
     });
 
-    fileSummary.push(fileData);
+    if (file.errors) {
+      summary.files.errors++;
+    } else if (file.warnings) {
+      summary.files.warnings++;
+    } else {
+      summary.files.clean++;
+    }
+
+    files.push(file);
   });
 
-  fileSummary.sort(sortSummary);
+  files.sort(sortSummary);
 
-  data.summary = summary;
-  data.fileSummary = fileSummary;
-
-  var html = template(data);
-
-  fs.writeFileSync(path.join(__dirname, 'report.html'), html);
-
-  function sortSummary(a, b) {
-    return (b.errors - a.errors);
-  }
-
-  return html;
+  return applyTemplate(
+    {
+      summary: summary,
+      files: files
+    }
+  );
 };
