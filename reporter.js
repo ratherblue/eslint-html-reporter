@@ -1,12 +1,23 @@
+/* eslint-env node */
+/* eslint "indent": [2, 2] */
+/* eslint "quotes": [2, "double"] */
+/* eslint "no-spaced-func": [2, "never"] */
+/* eslint "space-before-function-paren": [2, "never"] */
+/* eslint valid-jsdoc: [2, { prefer: { "return": "returns"}}] */
+/* eslint "space-after-keywords": [2, "always"] */
+/* eslint "space-before-blocks": [2, "always"] */
+/* eslint "space-in-parens": [2, "never"] */
+
+
 /**
- * @fileoverview HTML reporter
+ * @fileoverview ESLint HTML reporter
  * @author Evangelia Dendramis
  */
 "use strict";
 
 var handlebars = require("handlebars");
-var fs         = require("fs");
-var path       = require("path");
+var fs = require("fs");
+var path = require("path");
 
 //------------------------------------------------------------------------------
 // Helper Functions
@@ -14,9 +25,9 @@ var path       = require("path");
 
 /**
  * Sorting function
- * @param {object} a
- * @param {object} b
- * @returns {int}
+ * @param {object} a - Object to compare to b
+ * @param {object} b - Object to compare to a
+ * @returns {int} - Value used to sort the list of files
  */
 function sortSummary(a, b) {
   return (b.errors - a.errors);
@@ -24,9 +35,9 @@ function sortSummary(a, b) {
 
 /**
  * Handlebars helper
- * @param {object} context
- * @param {object} options
- * @returns {string}
+ * @param {object} context - Data passed to the helper
+ * @param {object} options - Nested
+ * @returns {string} - Table row with appropriate class name
  */
 function rowHelper(context, options) {
   var className = "success";
@@ -41,25 +52,8 @@ function rowHelper(context, options) {
 }
 
 /**
- * Apply handlebars template to data
- * @param {object} data
- * @returns {string}
- */
-function applyTemplate(data) {
-  registerHelpers();
-  registerPartials();
-
-  var source = fs.readFileSync(path.join(__dirname, "reporter.hbs"),
-    { encoding: "utf-8" }
-  );
-
-  var template = handlebars.compile(source);
-
-  return template(data);
-}
-
-/**
  * Register Handlebars partials
+ * @returns {void}
  */
 function registerPartials() {
   var summary = fs.readFileSync(path.join(__dirname, "partials", "summary.hbs"),
@@ -77,15 +71,45 @@ function registerPartials() {
 
 /**
  * Register Handlebars helpers
+ * @returns {void}
  */
- function registerHelpers() {
-   handlebars.registerHelper("row", rowHelper);
- }
+function registerHelpers() {
+  handlebars.registerHelper("row", rowHelper);
+}
+
+/**
+ * Apply handlebars template to data
+ * @param {object} data - Data to parse with Handlebars template
+ * @returns {string} - HTML-formatted report
+ */
+function applyTemplates(data) {
+  registerHelpers();
+  registerPartials();
+
+  var overview = fs.readFileSync(path.join(__dirname, "reporter.hbs"),
+    { encoding: "utf-8" }
+  );
+
+  var template = handlebars.compile(overview);
+
+ /* var source = fs.readFileSync(path.join(__dirname, "reporter.hbs"),
+    { encoding: "utf-8" }
+  );*/
+
+  /*var report = {
+    overview: template(data),
+    detailed: detailed(data)
+  }*/
+
+  return template(data);
+}
 
 //------------------------------------------------------------------------------
 // Public Interface
 //------------------------------------------------------------------------------
-module.exports = function (results) {
+module.exports = function(results) {
+
+  console.log(results);
 
   // summarize messages
   var summary = {
@@ -139,7 +163,7 @@ module.exports = function (results) {
 
   files.sort(sortSummary);
 
-  return applyTemplate(
+  return applyTemplates(
     {
       summary: summary,
       files: files
