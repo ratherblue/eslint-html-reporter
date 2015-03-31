@@ -1,114 +1,123 @@
-<style type="text/css">
-  .eslint-report {
-    font-family: "Helvetica Neue", sans-serif;
-    font-size: 14px;
-  }
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ESLint HTML Report</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+  <style type="text/css">
+    .eslint-report {
+      font-family: "Helvetica Neue", sans-serif;
+      font-size: 14px;
+    }
 
+    .eslint-report h2 {
+      padding-bottom: 6px;
+      line-height: 1;
+      margin-top: 24px;
+      margin-bottom: 18px;
+    }
 
-  .eslint-report h2 {
-    /*border-bottom: 1px solid #e6e6e6;*/
-    padding-bottom: 6px;
-    line-height: 1;
-    margin-top: 24px;
-    margin-bottom: 18px;
-  }
+    .eslint-report dt {
+      float: left;
+      width: 120px;
+      overflow: hidden;
+      clear: left;
+      white-space: nowrap;
+      font-weight: bold;
+    }
 
-  .eslint-report dt {
-    float: left;
-    width: 120px;
-    overflow: hidden;
-    clear: left;
-    white-space: nowrap;
-    font-weight: bold;
-  }
+    .eslint-report dd {
+      margin-left: 140px;
+    }
 
-  .eslint-report dd {
-    margin-left: 140px;
-  }
+    .report-table {
+      border-collapse: collapse;
+      font-size: 14px;
+    }
 
-  .report-table {
-    border-collapse: collapse;
-    font-size: 14px;
-  }
+    .report-table + .report-table {
+      margin-top: 12px;
+    }
 
-  .report-table + .report-table {
-    margin-top: 12px;
-  }
+    .report-table thead {
+      background-color: #eee;
+    }
 
-  .report-table thead {
-    background-color: #eee;
-  }
+    .report-table th {
+      text-align: left;
+      vertical-align: middle;
+    }
 
-  .report-table th {
-    text-align: left;
-    vertical-align: middle;
-  }
+    .report-table th,
+    .report-table td {
+      padding: 4px 9px;
+      border: 1px solid #e6e6e6;
+    }
 
-  .report-table th,
-  .report-table td {
-    padding: 4px 9px;
-    border: 1px solid #e6e6e6;
-  }
+    .report-table tbody tr:hover {
+      background-color: #efefef;
+    }
 
-  .report-table tbody tr:hover {
-    background-color: #efefef;
-  }
+    .report-table td {
+      line-height: 1.5;
+      vertical-align: top;
+    }
 
-  .report-table td {
-    line-height: 1.5;
-    vertical-align: top;
-  }
+    .table-wrapper {
+      display: flex;
+      justify-content: flex-start;
+      width: 500px;
+      align-items: flex-end;
+    }
 
-  .table-wrapper {
-    display: flex;
-    justify-content: flex-start;
-    width: 500px;
-    align-items: flex-end;
-  }
+    .table-column {
+      flex: 1;
+      margin: 10px;
+    }
 
-  .table-column {
-    flex: 1;
-    margin: 10px;
-  }
+    .summary-table {
+      border-spacing: 0;
+      border-collapse: collapse;
+      width: 100%;
+    }
 
-  .summary-table {
-    border-spacing: 0;
-    border-collapse: collapse;
-    width: 100%;
-  }
+    .summary-table td {
+      padding: 4px 9px;
+    }
 
-  .summary-table td {
-    padding: 4px 9px;
-  }
+    .summary-table td:last-child {
+      text-align: right;
+    }
 
-  .summary-table td:last-child {
-    text-align: right;
-  }
+    .summary-table tfoot td {
+      border-top: 2px solid #666;
+      font-weight: bold;
+    }
 
-  .summary-table tfoot td {
-    border-top: 2px solid #666;
-    font-weight: bold;
-  }
+    .danger td {
+      background-color: #f2dede;
+    }
 
-  .danger td {
-    background-color: #f2dede;
-  }
+    .warning td {
+      background-color: #fcf8e3;
+    }
 
-  .warning td {
-    background-color: #fcf8e3;
-  }
+    .success td {
+      background-color: #dff0d8;
+    }
 
-  .success td {
-    background-color: #dff0d8;
-  }
+  </style>
 
-</style>
+  <div class="eslint-report">
+    <h1>ESLint Report</h1>
 
-<div class="eslint-report">
-  <h1>ESLint Report</h1>
+    {{> summary summary}}
 
-  {{> summary summary}}
+    {{>fileBreakdown files}}
 
-  {{>fileBreakdown files}}
-
-</div>
+  </div>
+</body>
+</html>
