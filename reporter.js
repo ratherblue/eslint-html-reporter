@@ -56,17 +56,26 @@ function rowHelper(context, options) {
  * @returns {void}
  */
 function registerPartials() {
+  // top summary
   var summary = fs.readFileSync(path.join(__dirname, "partials", "summary.hbs"),
     { encoding: "utf-8" }
   );
 
   handlebars.registerPartial("summary", handlebars.compile(summary));
 
+  // file breakdown
   var fileBreakdown = fs.readFileSync(path.join(__dirname, "partials", "file-breakdown.hbs"),
     { encoding: "utf-8" }
   );
 
   handlebars.registerPartial("fileBreakdown", handlebars.compile(fileBreakdown));
+
+  // css
+  var css = fs.readFileSync(path.join(__dirname, "partials", "css.hbs"),
+    { encoding: "utf-8" }
+  );
+
+  handlebars.registerPartial("css", handlebars.compile(css));
 }
 
 /**
@@ -99,6 +108,8 @@ function applyTemplates(data) {
 // Public Interface
 //------------------------------------------------------------------------------
 module.exports = function(results) {
+
+  console.log(JSON.stringify(results));
 
   // summarize messages
   var summary = {
