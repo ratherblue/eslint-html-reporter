@@ -3,6 +3,7 @@
 HTML Reporter for ESLint
 
 * Please report bugs to https://github.com/edendramis/eslint-html-reporter/issues
+* Todo: Write tests
 
 ## Installation
 
