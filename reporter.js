@@ -111,7 +111,7 @@ module.exports = function(results) {
       errors: 0,
       warnings: 0,
       clean: 0,
-      total: 0
+      total: results.length
     },
     errorTypes: {}
   };

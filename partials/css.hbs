@@ -14,10 +14,7 @@
   .report-table {
     border-collapse: collapse;
     font-size: 14px;
-  }
-
-  .report-table + .report-table {
-    margin-top: 12px;
+    min-width: 800px;
   }
 
   .report-table thead {
@@ -35,13 +32,37 @@
     border: 1px solid #e6e6e6;
   }
 
-  .report-table tbody tr:hover {
-    background-color: #efefef;
+  .report-table .error-col {
+    width: 41px;
+  }
+
+  .report-table .warning-col {
+    width: 63px;
   }
 
   .report-table td {
     line-height: 1.5;
     vertical-align: top;
+  }
+
+  .report-table tbody td {
+    opacity: 0.8;
+  }
+
+  .report-table tbody tr:hover td {
+    opacity: 1;
+  }
+
+  .report-table .danger td {
+    background-color: #f2dede;
+  }
+
+  .report-table .warning td {
+    background-color: #fcf8e3;
+  }
+
+  .report-table .success td {
+    background-color: #dff0d8;
   }
 
   .table-wrapper {
@@ -73,17 +94,5 @@
   .summary-table tfoot td {
     border-top: 2px solid #666;
     font-weight: bold;
-  }
-
-  .danger td {
-    background-color: #f2dede;
-  }
-
-  .warning td {
-    background-color: #fcf8e3;
-  }
-
-  .success td {
-    background-color: #dff0d8;
   }
 </style>
