@@ -12,13 +12,13 @@ npm install eslint-html-reporter
 
 ## Usage
 
-Example CLI:
+Example usage with [ESLint CLI](http://eslint.org/docs/user-guide/command-line-interface):
 
 ```
-eslint -f *.js node_modules/eslint-html-reporter/reporter.js
+eslint -f *.js node_modules/eslint-html-reporter/reporter.js -o report.html
 ```
 
-Gulp:
+Example usage with [Gulp ESLint](https://github.com/adametry/gulp-eslint):
 
 ```js
 var eslint         = require('gulp-eslint');
