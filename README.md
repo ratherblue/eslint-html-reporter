@@ -8,7 +8,7 @@ HTML Reporter for ESLint
 ## Installation
 
 ```sh
-npm install eslint-html-reporter
+npm install eslint-html-reporter -g
 ```
 
 ## Usage
