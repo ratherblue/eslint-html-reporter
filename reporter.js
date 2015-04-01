@@ -92,15 +92,6 @@ function applyTemplates(data) {
 
   var template = handlebars.compile(overview);
 
- /* var source = fs.readFileSync(path.join(__dirname, "reporter.hbs"),
-    { encoding: "utf-8" }
-  );*/
-
-  /*var report = {
-    overview: template(data),
-    detailed: detailed(data)
-  }*/
-
   return template(data);
 }
 
@@ -108,8 +99,6 @@ function applyTemplates(data) {
 // Public Interface
 //------------------------------------------------------------------------------
 module.exports = function(results) {
-
-  console.log(results);
 
   // summarize messages
   var summary = {
