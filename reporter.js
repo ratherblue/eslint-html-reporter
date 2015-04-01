@@ -23,9 +23,9 @@ function sortSummary(a, b) {
 }
 
 /**
- * Handlebars helper
+ * Adds appropriate class name to a row
  * @param {object} context - Data passed to the helper
- * @param {object} options - Nested
+ * @param {object} options - Nested data
  * @returns {string} - Table row with appropriate class name
  */
 function rowHelper(context, options) {
@@ -38,6 +38,38 @@ function rowHelper(context, options) {
   }
 
   return "<tr class=\"" + className + "\">" + options.fn(this) + "</tr>";
+}
+
+/**
+ * Adds appropriate class name to a message row
+ * @param {object} context - Data passed to the helper
+ * @param {object} options - Nested data
+ * @returns {string} - Table row with appropriate class name
+ */
+function messageRow(context, options) {
+  var className = "";
+
+  if (context.severity === 2) {
+    className = "msg-danger";
+  } else if (context.severity === 1) {
+    className = "msg-warning";
+  }
+
+  return "<tr class=\"" + className + "\">" + options.fn(this) + "</tr>";
+}
+/**
+ * Format severity number into text
+ * @param {object} context - Data passed to the helper
+ * @returns {string} - Severity as text
+ */
+function formatSeverity(context) {
+  if (context.severity === 2) {
+    return "Error";
+  } else if (context.severity === 1) {
+    return "Warning";
+  } else {
+    return "";
+  }
 }
 
 /**
@@ -73,6 +105,8 @@ function registerPartials() {
  */
 function registerHelpers() {
   handlebars.registerHelper("row", rowHelper);
+  handlebars.registerHelper("messageRow", messageRow);
+  handlebars.registerHelper("formatSeverity", formatSeverity);
 }
 
 /**
@@ -126,7 +160,8 @@ module.exports = function(results) {
     var file = {
       path: result.filePath,
       errors: 0,
-      warnings: 0
+      warnings: 0,
+      messages: messages
     };
 
     messages.forEach(function(message) {

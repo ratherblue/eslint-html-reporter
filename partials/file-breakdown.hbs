@@ -1,4 +1,38 @@
-<h2>File Breakdown</h2>
+<script>
+  // yolo
+  function toggleAllDetails(node) {    
+    var rows = document.querySelectorAll("tr.details-row");
+
+    if (node.innerHTML === "(expand all)") {
+      node.innerHTML = "(collapse all)";
+
+      for (var x = 0; x < rows.length; x++) {
+        var row = rows[x];
+        row.className = "details-row";
+      }
+    } else {
+      node.innerHTML = "(expand all)";
+
+      for (var x = 0; x < rows.length; x++) {
+        var row = rows[x];
+        row.className = "details-row hidden";
+      }
+    }
+  }
+
+  function toggleDetails(node) {
+    var parentRow = node.parentNode.parentNode;
+    var detailsRow = parentRow.nextSibling;
+
+    if (detailsRow.className === "details-row hidden") {
+      detailsRow.className = "details-row";
+    } else {
+      detailsRow.className = "details-row hidden";
+    }
+  }
+</script>
+
+<h2>File Breakdown <a id="toggle" href="javascript:;" onclick="toggleAllDetails(this)" class="toggle-all-link">(expand all)</a></h2>
 
 <table class="report-table">
   <thead>
@@ -9,12 +43,36 @@
     </tr>
   </thead>
   <tbody>
-    {{#each this}}
-      {{#row this}}
-        <td>{{path}}</td>
+    {{~#each this~}}
+      {{~#row this~}}
+        <td>
+          {{~#if messages~}}
+            <a class="toggle-link" href="javascript:;" onclick="toggleDetails(this)">{{path}}</a>
+          {{~else~}}
+            {{path}}
+          {{~/if~}}
+        </td>
         <td>{{errors}}</td>
         <td>{{warnings}}</td>
-      {{/row}}
-    {{/each}}
+      {{~/row~}}
+      {{~#if messages~}}
+      <tr class="details-row hidden">
+        <td colspan="3">
+          <table class="details-table">
+            <tbody>
+              {{~#each messages~}}
+                {{~#messageRow this~}}
+                  <td class="location-col">{{line}}:{{column}}</td>
+                  <td class="severity-col">{{formatSeverity this}}</td>
+                  <td class="message-col">{{message}}</td>
+                  <td class="rule-col"><a href="http://eslint.org/docs/rules/{{ruleId}}">{{ruleId}}</a></td>
+                {{~/messageRow}}
+              {{~/each~}}
+            </tbody>
+          </table>
+        </td>
+      </tr>
+      {{~/if~}}
+    {{~/each~}}
   </tbody>
 </table>
