@@ -36,8 +36,7 @@ gulp.src(['js/**/*.js'])
 
 ## Author
 
-* http://edendramis.com(http://edendramis.com)
-* Evangelia Dendramis
+* [Evangelia Dendramis](http://edendramis.com)
 
 ## License
 
