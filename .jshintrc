@@ -1,0 +1,8 @@
+{
+  "globalstrict": true,
+  "quotmark":     "double",
+  "indent":       2,
+  "camelcase":    true,
+  "node":         true,
+  "validthis":    true
+}

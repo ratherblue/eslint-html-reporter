@@ -1,14 +1,3 @@
-/* eslint-env node */
-/* eslint "indent": [2, 2] */
-/* eslint "quotes": [2, "double"] */
-/* eslint "no-spaced-func": [2, "never"] */
-/* eslint "space-before-function-paren": [2, "never"] */
-/* eslint valid-jsdoc: [2, { prefer: { "return": "returns"}}] */
-/* eslint "space-after-keywords": [2, "always"] */
-/* eslint "space-before-blocks": [2, "always"] */
-/* eslint "space-in-parens": [2, "never"] */
-
-
 /**
  * @fileoverview ESLint HTML reporter
  * @author Evangelia Dendramis
