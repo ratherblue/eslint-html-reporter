@@ -13,8 +13,11 @@
   "files": [
     "index.js",
     "reporter.js",
+    "reporter-lite.js",
+    "util.js",
     "reporter.hbs",
     "partials/css.hbs",
+    "partials/js.hbs",
     "partials/file-breakdown.hbs",
     "partials/summary.hbs"
   ],

@@ -2,20 +2,22 @@
 <html lang="en">
 <head>
   <meta charset="utf-8">
-  <title>ESLint HTML Report</title>
+  <title>{{pageTitle}}</title>
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
   <meta name="viewport" content="width=device-width,initial-scale=1">
-</head>
-<body>
-
   {{> css}}
 
+  {{#if fullReport}}
+    {{> js}}
+  {{/if}}
+</head>
+<body>
   <div class="eslint-report">
-    <h1>ESLint Report</h1>
+    <h1>{{pageTitle}}</h1>
 
     {{> summary summary}}
 
-    {{> fileBreakdown files}}
+    {{> fileBreakdown this}}
   </div>
 </body>
 </html>

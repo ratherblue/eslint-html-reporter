@@ -12,7 +12,9 @@ var util = require("./util");
 //------------------------------------------------------------------------------
 module.exports = function(results) {
 
-  var data = util.summarizeData(results, true);
+  var data = util.summarizeData(results, false);
+
+  data.fullReport = false;
 
   return util.applyTemplates(data);
 };
