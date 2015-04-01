@@ -16,7 +16,7 @@ npm install eslint-html-reporter -g
 Example usage with [ESLint CLI](http://eslint.org/docs/user-guide/command-line-interface):
 
 ```
-eslint *.js -f node_modules/eslint-html-reporter/reporter.js -o report.html
+eslint file.js -f node_modules/eslint-html-reporter/reporter.js -o report.html
 ```
 
 Example usage with [Gulp ESLint](https://github.com/adametry/gulp-eslint):
