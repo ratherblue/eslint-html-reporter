@@ -13,6 +13,7 @@
   "files": [
     "index.js",
     "reporter.js",
+    "reporter.hbs",
     "partials/css.hbs",
     "partials/file-breakdown.hbs",
     "partials/summary.hbs"
