@@ -35,10 +35,6 @@ gulp.src(['js/**/*.js'])
   );
 ```
 
-## Author
-
-* [Evangelia Dendramis](http://edendramis.com)
-
 ## License
 
-[CC BY 4.0](https://creativecommons.org/licenses/by/4.0) © Evangelia Dendramis
+[MIT](https://github.com/edendramis/eslint-html-reporter/blob/master/LICENSE) © Evangelia Dendramis
