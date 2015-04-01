@@ -132,8 +132,6 @@ function applyTemplates(data) {
 //------------------------------------------------------------------------------
 module.exports = function(results) {
 
-  console.log(JSON.stringify(results));
-
   // summarize messages
   var summary = {
     alerts: {
