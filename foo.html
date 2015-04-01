@@ -1,0 +1,350 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <title>ESLint HTML Report</title>
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+</head>
+<body>
+
+  <style type="text/css">
+    .eslint-report {
+      font-family: "Helvetica Neue", sans-serif;
+      font-size: 14px;
+    }
+  
+    .eslint-report h2 {
+      padding-bottom: 6px;
+      line-height: 1;
+      margin-top: 24px;
+      margin-bottom: 18px;
+    }
+  
+    .eslint-report a {
+      text-decoration: none;
+    }
+  
+    .eslint-report table {
+      border-spacing: 0;
+      border-collapse: collapse;
+    }
+  
+    .toggle-all-link {
+      font-size: 14px;
+    }
+  
+    .report-table {
+      font-size: 14px;
+      min-width: 800px;
+      border: 1px solid #e6e6e6;
+    }
+  
+    .report-table thead {
+      background-color: #eee;
+    }
+  
+    .report-table th {
+      text-align: left;
+      vertical-align: middle;
+    }
+  
+    .report-table th,
+    .report-table td {
+      padding: 4px 9px;
+      border: 1px solid #ccc;
+    }
+  
+    .report-table td {
+      line-height: 1.5;
+      vertical-align: top;
+    }
+  
+    .report-table .error-col {
+      width: 41px;
+    }
+  
+    .report-table .warning-col {
+      width: 63px;
+    }
+  
+    .report-table .toggle-link {
+      display: block;
+    }
+  
+    .report-table .danger td {
+      background-color: rgba(242, 222, 222, 0.8);
+    }
+  
+    .report-table .danger:hover td {
+      background-color: rgba(242, 222, 222, 1);
+    }
+  
+    .report-table .warning td {
+      background-color: rgba(252, 248, 227, 0.8);
+    }
+  
+    .report-table .warning:hover td {
+      background-color: rgba(252, 248, 227, 1);
+    }
+  
+    .report-table .success td {
+      background-color: rgba(223, 240, 216, 0.8);
+    }
+  
+    .report-table .success:hover td {
+      background-color: rgba(223, 240, 216, 1);
+    }
+  
+    .table-wrapper {
+      display: flex;
+      justify-content: flex-start;
+      width: 500px;
+      align-items: flex-end;
+    }
+  
+    .table-column {
+      flex: 1;
+      margin: 10px;
+    }
+  
+    .summary-table {
+      width: 100%;
+    }
+  
+    .summary-table td {
+      padding: 4px 9px;
+    }
+  
+    .summary-table td:last-child {
+      text-align: right;
+    }
+  
+    .summary-table tfoot td {
+      border-top: 2px solid #666;
+      font-weight: bold;
+    }
+  
+    .details-row.hidden {
+      display: none;
+    }
+  
+    .details-table {
+      font-size: 12px;
+      width: 100%;
+      margin-bottom: 15px;
+    }
+  
+    .details-table td {
+      border: 0;
+      padding: 1px 6px;
+    }
+  
+    .details-table td:first-child {
+      padding-left: 0;
+    }
+  
+    .details-table .location-col {
+      width: 25px;
+    }
+  
+    .details-table .rule-col {
+      white-space: nowrap;
+      width: 100px;
+    }
+  
+    .details-table .rule-col a {
+      display: block;
+    }
+  
+    .details-table .rule-col a:hover {
+      text-decoration: underline;
+    }
+  
+    .details-table .severity-col {
+      width: 45px;
+    }
+  
+    .details-table .msg-danger .severity-col {
+      color: #900;
+    }
+  
+    .details-table .msg-warning .severity-col {
+      color: #900;
+    }
+  </style>
+  <div class="eslint-report">
+    <h1>ESLint Report</h1>
+
+    <h2>Summary</h2>
+    
+    <div class="table-wrapper">
+      <div class="table-column">
+        <table class="summary-table">
+            <tbody>
+              <tr>
+                <td>Errors</td>
+                <td>10</td>
+              </tr>
+              <tr>
+                <td>Warnings</td>
+                <td>0</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td>Total alerts</td>
+                <td>10</td>
+              </tr>
+            </tfoot>
+        </table>
+      </div>
+      <div class="table-column">
+        <table class="summary-table">
+            <tbody>
+              <tr>
+                <td>Files with errors</td>
+                <td>5</td>
+              </tr>
+              <tr>
+                <td>Files with only warnings</td>
+                <td>0</td>
+              </tr>
+              <tr>
+                <td>Clean files</td>
+                <td>2</td>
+              </tr>
+            </tbody>
+            <tfoot>
+              <tr>
+                <td>Total files linted</td>
+                <td>7</td>
+              </tr>
+            </tfoot>
+        </table>
+      </div>
+    </div>
+
+    <script>
+      // yolo
+      function toggleAllDetails(node) {    
+        var rows = document.querySelectorAll("tr.details-row");
+    
+        if (node.innerHTML === "(expand all)") {
+          node.innerHTML = "(collapse all)";
+    
+          for (var x = 0; x < rows.length; x++) {
+            var row = rows[x];
+            row.className = "details-row";
+          }
+        } else {
+          node.innerHTML = "(expand all)";
+    
+          for (var x = 0; x < rows.length; x++) {
+            var row = rows[x];
+            row.className = "details-row hidden";
+          }
+        }
+      }
+    
+      function toggleDetails(node) {
+        var parentRow = node.parentNode.parentNode;
+        var detailsRow = parentRow.nextSibling;
+    
+        if (detailsRow.className === "details-row hidden") {
+          detailsRow.className = "details-row";
+        } else {
+          detailsRow.className = "details-row hidden";
+        }
+      }
+    </script>
+    
+    <h2>File Breakdown <a id="toggle" href="javascript:;" onclick="toggleAllDetails(this)" class="toggle-all-link">(expand all)</a></h2>
+    
+    <table class="report-table">
+      <thead>
+        <tr>
+          <th>File</th>
+          <th class="error-col">Errors</th>
+          <th class="warning-col">Warnings</th>
+        </tr>
+      </thead>
+      <tbody><tr class="danger"><td><a class="toggle-link" href="javascript:;" onclick="toggleDetails(this)">test.js</a></td>
+            <td>6</td>
+            <td>0</td></tr><tr class="details-row hidden">
+            <td colspan="3">
+              <table class="details-table">
+                <tbody><tr class="msg-danger"><td class="location-col">2:0</td>
+                      <td class="severity-col">Error</td>
+                      <td class="message-col">Expected indentation of 0 characters.</td>
+                      <td class="rule-col"><a href="http://eslint.org/docs/rules/indent">indent</a></td></tr><tr class="msg-danger"><td class="location-col">2:6</td>
+                      <td class="severity-col">Error</td>
+                      <td class="message-col">foo2 is defined but never used</td>
+                      <td class="rule-col"><a href="http://eslint.org/docs/rules/no-unused-vars">no-unused-vars</a></td></tr><tr class="msg-danger"><td class="location-col">2:13</td>
+                      <td class="severity-col">Error</td>
+                      <td class="message-col">Missing &quot;use strict&quot; statement.</td>
+                      <td class="rule-col"><a href="http://eslint.org/docs/rules/strict">strict</a></td></tr><tr class="msg-danger"><td class="location-col">6:8</td>
+                      <td class="severity-col">Error</td>
+                      <td class="message-col">x is defined but never used</td>
+                      <td class="rule-col"><a href="http://eslint.org/docs/rules/no-unused-vars">no-unused-vars</a></td></tr><tr class="msg-danger"><td class="location-col">7:8</td>
+                      <td class="severity-col">Error</td>
+                      <td class="message-col">foo is defined but never used</td>
+                      <td class="rule-col"><a href="http://eslint.org/docs/rules/no-unused-vars">no-unused-vars</a></td></tr><tr class="msg-danger"><td class="location-col">8:3</td>
+                      <td class="severity-col">Error</td>
+                      <td class="message-col">Missing semicolon.</td>
+                      <td class="rule-col"><a href="http://eslint.org/docs/rules/semi">semi</a></td></tr></tbody>
+              </table>
+            </td>
+          </tr><tr class="danger"><td><a class="toggle-link" href="javascript:;" onclick="toggleDetails(this)">README.md</a></td>
+            <td>1</td>
+            <td>0</td></tr><tr class="details-row hidden">
+            <td colspan="3">
+              <table class="details-table">
+                <tbody><tr class="msg-danger"><td class="location-col">1:1</td>
+                      <td class="severity-col">Error</td>
+                      <td class="message-col">Unexpected token ILLEGAL</td>
+                      <td class="rule-col"><a href="http://eslint.org/docs/rules/"></a></td></tr></tbody>
+              </table>
+            </td>
+          </tr><tr class="danger"><td><a class="toggle-link" href="javascript:;" onclick="toggleDetails(this)">foo.html</a></td>
+            <td>1</td>
+            <td>0</td></tr><tr class="details-row hidden">
+            <td colspan="3">
+              <table class="details-table">
+                <tbody><tr class="msg-danger"><td class="location-col">1:1</td>
+                      <td class="severity-col">Error</td>
+                      <td class="message-col">Unexpected token &lt;</td>
+                      <td class="rule-col"><a href="http://eslint.org/docs/rules/"></a></td></tr></tbody>
+              </table>
+            </td>
+          </tr><tr class="danger"><td><a class="toggle-link" href="javascript:;" onclick="toggleDetails(this)">package.json</a></td>
+            <td>1</td>
+            <td>0</td></tr><tr class="details-row hidden">
+            <td colspan="3">
+              <table class="details-table">
+                <tbody><tr class="msg-danger"><td class="location-col">2:9</td>
+                      <td class="severity-col">Error</td>
+                      <td class="message-col">Unexpected token :</td>
+                      <td class="rule-col"><a href="http://eslint.org/docs/rules/"></a></td></tr></tbody>
+              </table>
+            </td>
+          </tr><tr class="danger"><td><a class="toggle-link" href="javascript:;" onclick="toggleDetails(this)">reporter.hbs</a></td>
+            <td>1</td>
+            <td>0</td></tr><tr class="details-row hidden">
+            <td colspan="3">
+              <table class="details-table">
+                <tbody><tr class="msg-danger"><td class="location-col">1:1</td>
+                      <td class="severity-col">Error</td>
+                      <td class="message-col">Unexpected token &lt;</td>
+                      <td class="rule-col"><a href="http://eslint.org/docs/rules/"></a></td></tr></tbody>
+              </table>
+            </td>
+          </tr><tr class="success"><td>index.js</td>
+            <td>0</td>
+            <td>0</td></tr><tr class="success"><td>reporter.js</td>
+            <td>0</td>
+            <td>0</td></tr></tbody>
+    </table>
+  </div>
+</body>
+</html>
