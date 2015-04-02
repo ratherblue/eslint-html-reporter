@@ -1,5 +1,5 @@
 /**
- * @fileoverview ESLint HTML reporter
+ * @fileoverview ESLint HTML "Lite" reporter
  * @author Evangelia Dendramis
  */
 "use strict";

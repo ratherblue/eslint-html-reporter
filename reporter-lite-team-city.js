@@ -1,5 +1,5 @@
 /**
- * @fileoverview ESLint HTML reporter with Team City integration
+ * @fileoverview ESLint HTML "Lite" reporter with Team City integration
  * @author Evangelia Dendramis
  */
 "use strict";
