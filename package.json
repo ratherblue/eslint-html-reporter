@@ -13,8 +13,11 @@
   "files": [
     "index.js",
     "reporter.js",
+    "reporter-team-city.js",
     "reporter-lite.js",
+    "reporter-lite-team-city.js",
     "util.js",
+    "ci-util.js",
     "reporter.hbs",
     "partials/css.hbs",
     "partials/js.hbs",
@@ -23,7 +26,8 @@
   ],
   "keywords": [
     "eslint",
-    "reporter"
+    "reporter",
+    "teamcity"
   ],
   "author": {
     "name": "Evangelia Dendramis",

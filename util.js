@@ -7,7 +7,7 @@
 var handlebars = require("handlebars");
 var fs = require("fs");
 var path = require("path");
-
+var ciUtil = require("./ci-util.js");
 
 //------------------------------------------------------------------------------
 // Helper Functions
@@ -140,9 +140,10 @@ exports.applyTemplates = function(data) {
  * Summarize reported data
  * @param {object} results - Data to parse with Handlebars template
  * @param {boolean} fullReport - Whether or not to print the full report
+ * @param {string} ciTool - Optional, currently only option is "teamCity"
  * @returns {object} - HTML-formatted report
  */
-exports.summarizeData = function(results, fullReport) {
+exports.summarizeData = function(results, fullReport, ciTool) {
   // summarize messages
   var summary = {
     alerts: {
@@ -159,9 +160,12 @@ exports.summarizeData = function(results, fullReport) {
     errorTypes: {}
   };
 
+  var consoleOut = "";
+
   var files = [];
 
   results.forEach(function(result) {
+
     var messages = result.messages;
 
     summary.alerts.total += messages.length;
@@ -176,15 +180,25 @@ exports.summarizeData = function(results, fullReport) {
       file.messages = messages;
     }
 
+    consoleOut += "##teamcity[testStarted name=\"ESLint: " + result.filePath + "\"]\n";
+
     messages.forEach(function(message) {
       if (message.severity === 2) {
         summary.alerts.errors++;
         file.errors++;
+
+        consoleOut += "##teamcity[testFailed name=\"ESLint: " + result.filePath + "\" message=\"";
+        consoleOut += result.filePath + ": line " + message.line + ", col " + message.column + ", ";
+        consoleOut += ciUtil.escapeTeamCityString(message.message);
+        consoleOut += "\"]\n";
+
       } else if (message.severity === 1) {
         summary.alerts.warnings++;
         file.warnings++;
       }
     });
+
+    consoleOut += "##teamcity[testFinished name=\"ESLint: " + result.filePath + "\"]\n";
 
     if (file.errors) {
       summary.files.errors++;
@@ -197,6 +211,15 @@ exports.summarizeData = function(results, fullReport) {
     files.push(file);
   });
 
+  if (typeof ciTool !== "undefined" && ciTool === "teamCity") {
+    process.stdout.write(consoleOut);
+
+    if (!consoleOut.length) {
+      process.stdout.write("##teamcity[testStarted name=\"ESLint\"]\n");
+      process.stdout.write("##teamcity[testFinished name=\"ESLint\"]\n");
+    }
+  }
+
   files.sort(this.sortSummary);
 
   return {
@@ -206,4 +229,3 @@ exports.summarizeData = function(results, fullReport) {
     pageTitle: (fullReport ? "ESLint HTML Report" : "ESLint HTML Report (lite)")
   };
 };
-
