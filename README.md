@@ -5,10 +5,13 @@ HTML Reporter for ESLint. Please report bugs to [https://github.com/edendramis/e
 Supports:
   * Detailed output (default)
   * "Lite" output (omits the detailed error messages)
+  * TeamCity console output
 
-Todo: 
+To Do: 
   * Write tests
   * Add "Lite" and TeamCity support to Gulp
+  * Check if it works with Grunt
+  * More CI support (Jenkins?)
 
 ## Installation
 
@@ -21,8 +24,11 @@ npm install eslint-html-reporter
 ### With [ESLint CLI](http://eslint.org/docs/user-guide/command-line-interface):
 
 ```sh
-# Basic
+# Basic - Single file
 eslint file.js -f node_modules/eslint-html-reporter/reporter.js -o report.html
+
+# Basic - Recurse current directory
+eslint . -f node_modules/eslint-html-reporter/reporter.js -o report.html
 
 # "Lite" (same as Basic, but omits the detailed error messages)
 eslint file.js -f node_modules/eslint-html-reporter/reporter-lite.js -o report.html
@@ -37,14 +43,14 @@ eslint file.js -f node_modules/eslint-html-reporter/reporter-lite-team-city.js -
 ### With [Gulp ESLint](https://github.com/adametry/gulp-eslint):
 
 ```js
-var eslint         = require('gulp-eslint');
-var eslintReporter = require('eslint-html-reporter');
-var path           = require('path');
-var fs             = require('fs');
+var eslint   = require('gulp-eslint');
+var reporter = require('eslint-html-reporter');
+var path     = require('path');
+var fs       = require('fs');
 
 gulp.src(['js/**/*.js'])
   .pipe(eslint())
-  .pipe(eslint.format(eslintReporter, function(results) {
+  .pipe(eslint.format(reporter, function(results) {
       fs.writeFileSync(path.join(__dirname, 'report-results.html'), results);
     })
   );
