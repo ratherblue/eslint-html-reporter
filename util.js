@@ -160,7 +160,7 @@ exports.summarizeData = function(results, fullReport, ciTool) {
     errorTypes: {}
   };
 
-  var consoleOut = "";
+  ciUtil.reportStart(ciTool);
 
   var files = [];
 
@@ -180,17 +180,17 @@ exports.summarizeData = function(results, fullReport, ciTool) {
       file.messages = messages;
     }
 
-    consoleOut += "##teamcity[testStarted name=\"ESLint: " + result.filePath + "\"]\n";
+    ciUtil.testStart(result.filePath, ciTool);
+
+    var messageList = [];
 
     messages.forEach(function(message) {
       if (message.severity === 2) {
+
         summary.alerts.errors++;
         file.errors++;
 
-        consoleOut += "##teamcity[testFailed name=\"ESLint: " + result.filePath + "\" message=\"";
-        consoleOut += result.filePath + ": line " + message.line + ", col " + message.column + ", ";
-        consoleOut += ciUtil.escapeTeamCityString(message.message);
-        consoleOut += "\"]\n";
+        messageList.push("line " + message.line + ", col " + message.column + ", " + message.message);
 
       } else if (message.severity === 1) {
         summary.alerts.warnings++;
@@ -198,7 +198,10 @@ exports.summarizeData = function(results, fullReport, ciTool) {
       }
     });
 
-    consoleOut += "##teamcity[testFinished name=\"ESLint: " + result.filePath + "\"]\n";
+    if (messageList.length) {
+      ciUtil.testFailed(result.filePath, messageList, ciTool);
+    }
+    ciUtil.testEnd(result.filePath, ciTool);
 
     if (file.errors) {
       summary.files.errors++;
@@ -211,14 +214,7 @@ exports.summarizeData = function(results, fullReport, ciTool) {
     files.push(file);
   });
 
-  if (typeof ciTool !== "undefined" && ciTool === "teamCity") {
-    process.stdout.write(consoleOut);
-
-    if (!consoleOut.length) {
-      process.stdout.write("##teamcity[testStarted name=\"ESLint\"]\n");
-      process.stdout.write("##teamcity[testFinished name=\"ESLint\"]\n");
-    }
-  }
+  ciUtil.reportEnd(ciTool);
 
   files.sort(this.sortSummary);
 
