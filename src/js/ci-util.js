@@ -13,7 +13,7 @@ exports.reportName = "ESLint";
 */
 exports.reportStart = function(ciTool) {
   if (typeof ciTool !== "undefined" && ciTool === "teamCity") {
-    process.stdout.write("##teamcity[testSuiteStarted name=\"" + this.reportName + "\"]\n");
+    process.stdout.write("##teamcity[testSuiteStarted name='" + this.reportName + "']\n");
   }
 };
 
@@ -24,7 +24,7 @@ exports.reportStart = function(ciTool) {
 */
 exports.reportEnd = function(ciTool) {
   if (typeof ciTool !== "undefined" && ciTool === "teamCity") {
-    process.stdout.write("##teamcity[testSuiteFinished name=\"" + this.reportName + "\"]\n");
+    process.stdout.write("##teamcity[testSuiteFinished name='" + this.reportName + "']\n");
   }
 };
 
@@ -36,7 +36,7 @@ exports.reportEnd = function(ciTool) {
 */
 exports.testStart = function(filePath, ciTool) {
   if (typeof ciTool !== "undefined" && ciTool === "teamCity") {
-    process.stdout.write("##teamcity[testStarted name=\"" + this.reportName + ": " + this.escapeTeamCityString(filePath) + "\"]\n");
+    process.stdout.write("##teamcity[testStarted name='" + this.reportName + ": " + this.escapeTeamCityString(filePath) + "']\n");
   }
 };
 
@@ -48,7 +48,7 @@ exports.testStart = function(filePath, ciTool) {
 */
 exports.testEnd = function(filePath, ciTool) {
   if (typeof ciTool !== "undefined" && ciTool === "teamCity") {
-    process.stdout.write("##teamcity[testFinished name=\"" + this.reportName + ": " + this.escapeTeamCityString(filePath) + "\"]\n");
+    process.stdout.write("##teamcity[testFinished name='" + this.reportName + ": " + this.escapeTeamCityString(filePath) + "']\n");
   }
 };
 
@@ -61,8 +61,8 @@ exports.testEnd = function(filePath, ciTool) {
 */
 exports.testFailed = function(filePath, messageList, ciTool) {
   if (typeof ciTool !== "undefined" && ciTool === "teamCity") {
-    process.stdout.write("##teamcity[testFailed name=\"" + this.reportName +
-      ": " + this.escapeTeamCityString(filePath) + "\" message=\"" + this.escapeTeamCityString(messageList.join("\n")) + "\"]\n");
+    process.stdout.write("##teamcity[testFailed name='" + this.reportName +
+      ": " + this.escapeTeamCityString(filePath) + "' message='" + this.escapeTeamCityString(messageList.join("\n")) + "']\n");
   }
 };
 
