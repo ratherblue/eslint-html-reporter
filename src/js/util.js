@@ -8,13 +8,39 @@ var ciUtil = require("./ci-util.js");
 
 
 /**
- * Sorting function
+ * Sort files so the ones with the most errors are at the top
  * @param {object} a - Object to compare to b
  * @param {object} b - Object to compare to a
  * @returns {int} - Value used to sort the list of files
  */
-exports.sortSummary = function(a, b) {
+exports.sortErrors = function(a, b) {
   return (b.errors - a.errors);
+};
+
+/**
+ * Sort files with only warnings so the ones with the most warnings are at the top
+ * @param {object} a - Object to compare to b
+ * @param {object} b - Object to compare to a
+ * @returns {int} - Value used to sort the list of files
+ */
+exports.sortWarnings = function(a, b) {
+  return (b.warnings - a.warnings);
+};
+
+/**
+ * Sort clean files alphabetically
+ * @param {object} a - Object to compare to b
+ * @param {object} b - Object to compare to a
+ * @returns {int} - Value used to sort the list of files
+ */
+exports.sortClean = function(a, b) {
+  if (a.path < b.path) {
+    return -1;
+  } else if (a.path > b.path) {
+    return 1;
+  } else {
+    return 0;
+  }
 };
 
 /**
@@ -97,7 +123,7 @@ exports.summarizeData = function(results, fullReport, ciTool) {
 
   ciUtil.reportEnd(ciTool);
 
-  files.sort(this.sortSummary);
+  files.sort(this.sortErrors);
 
   return {
     summary: summary,

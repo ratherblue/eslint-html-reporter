@@ -4,26 +4,12 @@
   "description": "HTML Reporter for ESLint",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "node_modules/mocha/bin/mocha"
   },
   "repository": {
     "type": "git",
     "url": "https://github.com/edendramis/eslint-html-reporter"
   },
-  "files": [
-    "index.js",
-    "reporter.js",
-    "reporter-team-city.js",
-    "reporter-lite.js",
-    "reporter-lite-team-city.js",
-    "util.js",
-    "ci-util.js",
-    "reporter.hbs",
-    "partials/css.hbs",
-    "partials/js.hbs",
-    "partials/file-breakdown.hbs",
-    "partials/summary.hbs"
-  ],
   "keywords": [
     "eslint",
     "reporter",
@@ -45,5 +31,9 @@
   "homepage": "https://github.com/edendramis/eslint-html-reporter",
   "dependencies": {
     "handlebars": "^3.0.1"
+  },
+  "devDependencies": {
+    "chai": "^2.2.0",
+    "mocha": "^2.2.1"
   }
 }
