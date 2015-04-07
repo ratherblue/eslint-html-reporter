@@ -4,15 +4,13 @@
  */
 "use strict";
 
-var util = require("./util");
+var util = require("./src/js/util");
+var hbsUtil = require("./src/js/hbs-util");
 
 
-//------------------------------------------------------------------------------
-// Public Interface
-//------------------------------------------------------------------------------
 module.exports = function(results) {
 
   var data = util.summarizeData(results, true);
 
-  return util.applyTemplates(data);
+  return hbsUtil.applyTemplates(data);
 };
