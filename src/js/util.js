@@ -7,6 +7,9 @@
 var ciUtil = require("./ci-util.js");
 
 
+var errorOccurances = [];
+var warningOccurances = [];
+
 /**
  * Sort files so the ones with the most errors are at the top
  * @param {object} a - Object to compare to b
@@ -35,6 +38,37 @@ exports.sortErrors = function(a, b) {
   }
 };
 
+var sortFunc = function(a, b) {
+  return b[1] - a[1];
+};
+
+/**
+ * Count the occurances of an error
+ * @param {string} key - Linting rule
+ * @returns {void}
+ */
+var addErrorOccurance = function(key) {
+
+  if (!errorOccurances[key]) {
+    errorOccurances[key] = 0;
+  }
+
+  errorOccurances[key]++;
+};
+
+/**
+ * Count the occurances of a warning
+ * @param {string} key - Linting rule
+ * @returns {void}
+ */
+var addWarningOccurance = function(key) {
+
+  if (!warningOccurances[key]) {
+    warningOccurances[key] = 0;
+  }
+
+  warningOccurances[key]++;
+};
 
 /**
  * Summarize reported data
@@ -44,6 +78,7 @@ exports.sortErrors = function(a, b) {
  * @returns {object} - HTML-formatted report
  */
 exports.summarizeData = function(results, fullReport, ciTool) {
+
   // summarize messages
   var summary = {
     alerts: {
@@ -85,14 +120,17 @@ exports.summarizeData = function(results, fullReport, ciTool) {
     var messageList = [];
 
     messages.forEach(function(message) {
+
       if (message.severity === 2) {
+        addErrorOccurance(message.ruleId);
 
         summary.alerts.errors++;
         file.errors++;
 
         messageList.push("line " + message.line + ", col " + message.column + ", " + message.message);
-
       } else if (message.severity === 1) {
+        addWarningOccurance(message.ruleId);
+
         summary.alerts.warnings++;
         file.warnings++;
       }
@@ -101,6 +139,7 @@ exports.summarizeData = function(results, fullReport, ciTool) {
     if (messageList.length) {
       ciUtil.testFailed(result.filePath, messageList, ciTool);
     }
+
     ciUtil.testEnd(result.filePath, ciTool);
 
     if (file.errors) {
@@ -114,6 +153,16 @@ exports.summarizeData = function(results, fullReport, ciTool) {
     files.push(file);
   });
 
+  var foonew = [];
+
+  for (var obj in errorOccurances) {
+    foonew.push([obj, errorOccurances[obj]]);
+    console.log(errorOccurances[obj]);
+  }
+
+  foonew.sort(sortFunc);
+
+  console.log(foonew);
   ciUtil.reportEnd(ciTool);
 
   files.sort(this.sortErrors);
@@ -122,6 +171,7 @@ exports.summarizeData = function(results, fullReport, ciTool) {
     summary: summary,
     files: files,
     fullReport: fullReport,
+    errorOccurances: foonew,
     pageTitle: (fullReport ? "ESLint HTML Report" : "ESLint HTML Report (lite)")
   };
 };
