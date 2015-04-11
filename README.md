@@ -1,17 +1,15 @@
-# ESLint HTML Reporter
+# ESLint HTML Reporter [![Build Status](https://travis-ci.org/edendramis/eslint-html-reporter.svg?branch=master)](https://travis-ci.org/edendramis/eslint-html-reporter)
 
 HTML Reporter for ESLint. Please report bugs to [https://github.com/edendramis/eslint-html-reporter/issues](https://github.com/edendramis/eslint-html-reporter/issues)
 
-Supports:
-  * Detailed output (default)
-  * "Lite" output (omits the detailed error messages)
-  * TeamCity console output
+Features:
+* Generates an HTML page with a summary of all linted files and their errors
+* Choice between detailed and "lite" output
+* Optional integration with TeamCity's console
 
-To Do: 
-  * Write tests
-  * Add "Lite" and TeamCity support to Gulp
-  * Check if it works with Grunt
-  * More CI support (Jenkins?)
+Upcoming features:
+* Summary of 5 most-common errors and warnings
+
 
 ## Installation
 
