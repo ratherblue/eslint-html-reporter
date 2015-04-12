@@ -2,10 +2,10 @@
  * @fileoverview ESLint HTML reporter
  * @author Evangelia Dendramis
  */
-"use strict";
+'use strict';
 
-var util = require("./src/js/util");
-var hbsUtil = require("./src/js/hbs-util");
+var util = require('./src/js/util');
+var hbsUtil = require('./src/js/hbs-util');
 
 
 module.exports = function(results) {
