@@ -24,7 +24,7 @@ exports.rowHelper = function(context, options) {
     className = 'warning';
   }
 
-  return '<tr class=\'' + className + '\'>' + options.fn(this) + '</tr>';
+  return '<tr class="' + className + '">' + options.fn(this) + '</tr>';
 };
 
 /**
@@ -78,6 +78,11 @@ exports.registerPartials = function() {
     { encoding: 'utf-8' }
   );
 
+  // occurances
+  var occurances = fs.readFileSync(path.join(partialsPath, 'occurances.hbs'),
+    { encoding: 'utf-8' }
+  );
+
   // css
   var css = fs.readFileSync(path.join(partialsPath, 'css.hbs'),
     { encoding: 'utf-8' }
@@ -91,6 +96,7 @@ exports.registerPartials = function() {
   handlebars.registerPartial({
     summary: handlebars.compile(summary),
     fileBreakdown: handlebars.compile(fileBreakdown),
+    occurances: handlebars.compile(occurances),
     js: handlebars.compile(js),
     css: handlebars.compile(css)
   });

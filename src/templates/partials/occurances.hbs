@@ -1,0 +1,30 @@
+<h2>Most-Common Errors and Warnings</h2>
+
+<div class="table-wrapper occurances">
+  <div class="table-column">
+    <h3>Errors</h3>
+    <table class="summary-table">
+      <tbody>
+        {{#each errorOccurances}}
+          <tr>
+            <td><a href="http://eslint.org/docs/rules/{{name}}">{{name}}</a></td>
+            <td>{{count}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+  <div class="table-column">
+    <table class="summary-table">
+      <h3>Warnings</h3>
+      <tbody>
+        {{#each warningOccurances}}
+          <tr>
+            <td><a href="http://eslint.org/docs/rules/{{name}}">{{name}}</a></td>
+            <td>{{count}}</td>
+          </tr>
+        {{/each}}
+      </tbody>
+    </table>
+  </div>
+</div>

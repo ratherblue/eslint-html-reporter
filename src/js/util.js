@@ -6,9 +6,24 @@
 
 var ciUtil = require('./ci-util.js');
 
-
 var errorOccurances = [];
 var warningOccurances = [];
+
+// summarize messages
+var summary = {
+  alerts: {
+    errors: 0,
+    warnings: 0,
+    total: 0
+  },
+  files: {
+    errors: 0,
+    warnings: 0,
+    clean: 0,
+    total: 0
+  },
+  errorTypes: {}
+};
 
 /**
  * Sort files so the ones with the most errors are at the top
@@ -38,8 +53,8 @@ exports.sortErrors = function(a, b) {
   }
 };
 
-var sortFunc = function(a, b) {
-  return b[1] - a[1];
+exports.sortOccurances = function(a, b) {
+  return b.count - a.count;
 };
 
 /**
@@ -49,11 +64,18 @@ var sortFunc = function(a, b) {
  */
 var addErrorOccurance = function(key) {
 
-  if (!errorOccurances[key]) {
-    errorOccurances[key] = 0;
+  var foundOccurance = false;
+
+  for (var x = 0; x < errorOccurances.length; x++) {
+    if (errorOccurances[x].name === key) {
+      foundOccurance = true;
+      errorOccurances[x].count++;
+    }
   }
 
-  errorOccurances[key]++;
+  if (!foundOccurance) {
+    errorOccurances.push({ name: key, count: 1});
+  }
 };
 
 /**
@@ -63,11 +85,18 @@ var addErrorOccurance = function(key) {
  */
 var addWarningOccurance = function(key) {
 
-  if (!warningOccurances[key]) {
-    warningOccurances[key] = 0;
+  var foundOccurance = false;
+
+  for (var x = 0; x < warningOccurances.length; x++) {
+    if (warningOccurances[x].name === key) {
+      foundOccurance = true;
+      warningOccurances[x].count++;
+    }
   }
 
-  warningOccurances[key]++;
+  if (!foundOccurance) {
+    warningOccurances.push({ name: key, count: 1});
+  }
 };
 
 /**
@@ -79,21 +108,7 @@ var addWarningOccurance = function(key) {
  */
 exports.summarizeData = function(results, fullReport, ciTool) {
 
-  // summarize messages
-  var summary = {
-    alerts: {
-      errors: 0,
-      warnings: 0,
-      total: 0
-    },
-    files: {
-      errors: 0,
-      warnings: 0,
-      clean: 0,
-      total: results.length
-    },
-    errorTypes: {}
-  };
+  summary.files.total = results.length;
 
   ciUtil.reportStart(ciTool);
 
@@ -153,16 +168,12 @@ exports.summarizeData = function(results, fullReport, ciTool) {
     files.push(file);
   });
 
-  var foonew = [];
+  errorOccurances.sort(this.sortOccurances);
+  errorOccurances = errorOccurances.slice(0, 5);
 
-  for (var obj in errorOccurances) {
-    foonew.push([obj, errorOccurances[obj]]);
-    console.log(errorOccurances[obj]);
-  }
+  warningOccurances.sort(this.sortOccurances);
+  warningOccurances = warningOccurances.slice(0, 5);
 
-  foonew.sort(sortFunc);
-
-  console.log(foonew);
   ciUtil.reportEnd(ciTool);
 
   files.sort(this.sortErrors);
@@ -171,7 +182,8 @@ exports.summarizeData = function(results, fullReport, ciTool) {
     summary: summary,
     files: files,
     fullReport: fullReport,
-    errorOccurances: foonew,
+    errorOccurances: errorOccurances,
+    warningOccurances: warningOccurances,
     pageTitle: (fullReport ? 'ESLint HTML Report' : 'ESLint HTML Report (lite)')
   };
 };

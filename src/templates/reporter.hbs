@@ -15,11 +15,9 @@
   <div class="eslint-report">
     <h1>{{pageTitle}}</h1>
 
-    {{#each errorOccurances}}
-      {{0}}: {{1}}<br>
-    {{/each}}
-
     {{> summary summary}}
+
+    {{> occurances this}}
 
     {{> fileBreakdown this}}
   </div>
