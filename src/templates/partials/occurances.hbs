@@ -3,28 +3,38 @@
 <div class="table-wrapper occurances">
   <div class="table-column">
     <h3>Errors</h3>
-    <table class="summary-table">
-      <tbody>
-        {{#each errorOccurances}}
-          <tr>
-            <td><a href="http://eslint.org/docs/rules/{{name}}">{{name}}</a></td>
-            <td>{{count}}</td>
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
+
+    {{#if errorOccurances.length}}
+      <table class="summary-table">
+        <tbody>
+          {{#each errorOccurances}}
+            <tr>
+              <td><a href="http://eslint.org/docs/rules/{{name}}">{{name}}</a></td>
+              <td>{{count}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{^}}
+      <p>No errors were found!</p>
+    {{/if}}
   </div>
   <div class="table-column">
-    <table class="summary-table">
-      <h3>Warnings</h3>
-      <tbody>
-        {{#each warningOccurances}}
-          <tr>
-            <td><a href="http://eslint.org/docs/rules/{{name}}">{{name}}</a></td>
-            <td>{{count}}</td>
-          </tr>
-        {{/each}}
-      </tbody>
-    </table>
+    <h3>Warnings</h3>
+
+    {{#if errorOccurances.length}}
+      <table class="summary-table">
+        <tbody>
+          {{#each warningOccurances}}
+            <tr>
+              <td><a href="http://eslint.org/docs/rules/{{name}}">{{name}}</a></td>
+              <td>{{count}}</td>
+            </tr>
+          {{/each}}
+        </tbody>
+      </table>
+    {{^}}
+      <p>No warnings were found!</p>
+    {{/if}}
   </div>
 </div>

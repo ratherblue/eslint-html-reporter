@@ -15,11 +15,18 @@
   <div class="eslint-report">
     <h1>{{pageTitle}}</h1>
 
-    {{> summary summary}}
+    {{#if summary.files.total}}
+      {{> summary summary}}
 
-    {{> occurances this}}
+      {{#if summary.alerts.total}}
+        {{> occurances this}}
+      {{/if}}
 
-    {{> fileBreakdown this}}
+      {{> fileBreakdown this}}
+
+    {{^}}
+      <p>No files were linted!</p>
+    {{/if}}
   </div>
 </body>
 </html>

@@ -184,6 +184,6 @@ exports.summarizeData = function(results, fullReport, ciTool) {
     fullReport: fullReport,
     errorOccurances: errorOccurances,
     warningOccurances: warningOccurances,
-    pageTitle: (fullReport ? 'ESLint HTML Report' : 'ESLint HTML Report (lite)')
+    pageTitle: (fullReport ? 'ESLint Results' : 'ESLint Results (lite)')
   };
 };
