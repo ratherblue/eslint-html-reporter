@@ -2,9 +2,9 @@
  * @fileoverview Utils for ESLint HTML reporter
  * @author Evangelia Dendramis
  */
-"use strict";
+'use strict';
 
-var ciUtil = require("./ci-util.js");
+var ciUtil = require('./ci-util.js');
 
 
 var errorOccurances = [];
@@ -74,7 +74,7 @@ var addWarningOccurance = function(key) {
  * Summarize reported data
  * @param {object} results - Data to parse with Handlebars template
  * @param {boolean} fullReport - Whether or not to print the full report
- * @param {string} ciTool - Optional, currently only option is "teamCity"
+ * @param {string} ciTool - Optional, currently only option is 'teamCity'
  * @returns {object} - HTML-formatted report
  */
 exports.summarizeData = function(results, fullReport, ciTool) {
@@ -127,7 +127,7 @@ exports.summarizeData = function(results, fullReport, ciTool) {
         summary.alerts.errors++;
         file.errors++;
 
-        messageList.push("line " + message.line + ", col " + message.column + ", " + message.message);
+        messageList.push('line ' + message.line + ', col ' + message.column + ', ' + message.message);
       } else if (message.severity === 1) {
         addWarningOccurance(message.ruleId);
 
@@ -172,6 +172,6 @@ exports.summarizeData = function(results, fullReport, ciTool) {
     files: files,
     fullReport: fullReport,
     errorOccurances: foonew,
-    pageTitle: (fullReport ? "ESLint HTML Report" : "ESLint HTML Report (lite)")
+    pageTitle: (fullReport ? 'ESLint HTML Report' : 'ESLint HTML Report (lite)')
   };
 };

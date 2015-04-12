@@ -2,9 +2,9 @@
  * @fileoverview CI Utils for ESLint HTML Reporter
  * @author Evangelia Dendramis
  */
-"use strict";
+'use strict';
 
-exports.reportName = "ESLint";
+exports.reportName = 'ESLint';
 
 /**
  * Prints start of report to stdout
@@ -12,8 +12,8 @@ exports.reportName = "ESLint";
  * @returns {void}
 */
 exports.reportStart = function(ciTool) {
-  if (typeof ciTool !== "undefined" && ciTool === "teamCity") {
-    process.stdout.write("##teamcity[testSuiteStarted name='" + this.reportName + "']\n");
+  if (typeof ciTool !== 'undefined' && ciTool === 'teamCity') {
+    process.stdout.write('##teamcity[testSuiteStarted name=\'' + this.reportName + '\']\n');
   }
 };
 
@@ -23,8 +23,8 @@ exports.reportStart = function(ciTool) {
  * @returns {void}
 */
 exports.reportEnd = function(ciTool) {
-  if (typeof ciTool !== "undefined" && ciTool === "teamCity") {
-    process.stdout.write("##teamcity[testSuiteFinished name='" + this.reportName + "']\n");
+  if (typeof ciTool !== 'undefined' && ciTool === 'teamCity') {
+    process.stdout.write('##teamcity[testSuiteFinished name=\'' + this.reportName + '\']\n');
   }
 };
 
@@ -35,8 +35,8 @@ exports.reportEnd = function(ciTool) {
  * @returns {void}
 */
 exports.testStart = function(filePath, ciTool) {
-  if (typeof ciTool !== "undefined" && ciTool === "teamCity") {
-    process.stdout.write("##teamcity[testStarted name='" + this.reportName + ": " + this.escapeTeamCityString(filePath) + "']\n");
+  if (typeof ciTool !== 'undefined' && ciTool === 'teamCity') {
+    process.stdout.write('##teamcity[testStarted name=\'' + this.reportName + ': ' + this.escapeTeamCityString(filePath) + '\']\n');
   }
 };
 
@@ -47,8 +47,8 @@ exports.testStart = function(filePath, ciTool) {
  * @returns {void}
 */
 exports.testEnd = function(filePath, ciTool) {
-  if (typeof ciTool !== "undefined" && ciTool === "teamCity") {
-    process.stdout.write("##teamcity[testFinished name='" + this.reportName + ": " + this.escapeTeamCityString(filePath) + "']\n");
+  if (typeof ciTool !== 'undefined' && ciTool === 'teamCity') {
+    process.stdout.write('##teamcity[testFinished name=\'' + this.reportName + ': ' + this.escapeTeamCityString(filePath) + '\']\n');
   }
 };
 
@@ -60,9 +60,9 @@ exports.testEnd = function(filePath, ciTool) {
  * @returns {void}
 */
 exports.testFailed = function(filePath, messageList, ciTool) {
-  if (typeof ciTool !== "undefined" && ciTool === "teamCity") {
-    process.stdout.write("##teamcity[testFailed name='" + this.reportName +
-      ": " + this.escapeTeamCityString(filePath) + "' message='" + this.escapeTeamCityString(messageList.join("\n")) + "']\n");
+  if (typeof ciTool !== 'undefined' && ciTool === 'teamCity') {
+    process.stdout.write('##teamcity[testFailed name=\'' + this.reportName +
+      ': ' + this.escapeTeamCityString(filePath) + '\' message=\'' + this.escapeTeamCityString(messageList.join('\n')) + '\']\n');
   }
 };
 
@@ -74,16 +74,16 @@ exports.testFailed = function(filePath, messageList, ciTool) {
 exports.escapeTeamCityString = function(str) {
 
   if (!str) {
-    return "";
+    return '';
   }
 
-  return str.replace(/\|/g, "||")
-    .replace(/\'/g, "|\'")
-    .replace(/\n/g, "|n")
-    .replace(/\r/g, "|r")
-    .replace(/\u0085/g, "|x")
-    .replace(/\u2028/g, "|l")
-    .replace(/\u2029/g, "|p")
-    .replace(/\[/g, "|[")
-    .replace(/\]/g, "|]");
+  return str.replace(/\|/g, '||')
+    .replace(/\'/g, '|\'')
+    .replace(/\n/g, '|n')
+    .replace(/\r/g, '|r')
+    .replace(/\u0085/g, '|x')
+    .replace(/\u2028/g, '|l')
+    .replace(/\u2029/g, '|p')
+    .replace(/\[/g, '|[')
+    .replace(/\]/g, '|]');
 };

@@ -2,11 +2,11 @@
  * @fileoverview Handlebars Utils for ESLint HTML Reporter
  * @author Evangelia Dendramis
  */
-"use strict";
+'use strict';
 
-var handlebars = require("handlebars");
-var fs = require("fs");
-var path = require("path");
+var handlebars = require('handlebars');
+var fs = require('fs');
+var path = require('path');
 
 
 /**
@@ -16,15 +16,15 @@ var path = require("path");
 * @returns {string} - Table row with appropriate class name
 */
 exports.rowHelper = function(context, options) {
-  var className = "success";
+  var className = 'success';
 
   if (context.errors) {
-    className = "danger";
+    className = 'danger';
   } else if (context.warnings) {
-    className = "warning";
+    className = 'warning';
   }
 
-  return "<tr class=\"" + className + "\">" + options.fn(this) + "</tr>";
+  return '<tr class=\'' + className + '\'>' + options.fn(this) + '</tr>';
 };
 
 /**
@@ -34,15 +34,15 @@ exports.rowHelper = function(context, options) {
 * @returns {string} - Table row with appropriate class name
 */
 exports.messageRow = function(context, options) {
-  var className = "";
+  var className = '';
 
   if (context.severity === 2) {
-    className = "msg-danger";
+    className = 'msg-danger';
   } else if (context.severity === 1) {
-    className = "msg-warning";
+    className = 'msg-warning';
   }
 
-  return "<tr class=\"" + className + "\">" + options.fn(this) + "</tr>";
+  return '<tr class="' + className + '">' + options.fn(this) + '</tr>';
 };
 
 /**
@@ -52,11 +52,11 @@ exports.messageRow = function(context, options) {
 */
 exports.formatSeverity = function(context) {
   if (context.severity === 2) {
-    return "Error";
+    return 'Error';
   } else if (context.severity === 1) {
-    return "Warning";
+    return 'Warning';
   } else {
-    return "";
+    return '';
   }
 };
 
@@ -66,26 +66,26 @@ exports.formatSeverity = function(context) {
 */
 exports.registerPartials = function() {
 
-  var partialsPath = path.join(__dirname, "..", "templates", "partials");
+  var partialsPath = path.join(__dirname, '..', 'templates', 'partials');
 
   // top summary
-  var summary = fs.readFileSync(path.join(partialsPath, "summary.hbs"),
-    { encoding: "utf-8" }
+  var summary = fs.readFileSync(path.join(partialsPath, 'summary.hbs'),
+    { encoding: 'utf-8' }
   );
 
   // file breakdown
-  var fileBreakdown = fs.readFileSync(path.join(partialsPath, "file-breakdown.hbs"),
-    { encoding: "utf-8" }
+  var fileBreakdown = fs.readFileSync(path.join(partialsPath, 'file-breakdown.hbs'),
+    { encoding: 'utf-8' }
   );
 
   // css
-  var css = fs.readFileSync(path.join(partialsPath, "css.hbs"),
-    { encoding: "utf-8" }
+  var css = fs.readFileSync(path.join(partialsPath, 'css.hbs'),
+    { encoding: 'utf-8' }
   );
 
   // js
-  var js = fs.readFileSync(path.join(partialsPath, "js.hbs"),
-    { encoding: "utf-8" }
+  var js = fs.readFileSync(path.join(partialsPath, 'js.hbs'),
+    { encoding: 'utf-8' }
   );
 
   handlebars.registerPartial({
@@ -101,9 +101,9 @@ exports.registerPartials = function() {
 * @returns {void}
 */
 exports.registerHelpers = function() {
-  handlebars.registerHelper("row", this.rowHelper);
-  handlebars.registerHelper("messageRow", this.messageRow);
-  handlebars.registerHelper("formatSeverity", this.formatSeverity);
+  handlebars.registerHelper('row', this.rowHelper);
+  handlebars.registerHelper('messageRow', this.messageRow);
+  handlebars.registerHelper('formatSeverity', this.formatSeverity);
 };
 
 /**
@@ -115,8 +115,8 @@ exports.applyTemplates = function(data) {
   this.registerHelpers();
   this.registerPartials();
 
-  var overview = fs.readFileSync(path.join(__dirname, "..", "templates", "reporter.hbs"),
-    { encoding: "utf-8" }
+  var overview = fs.readFileSync(path.join(__dirname, '..', 'templates', 'reporter.hbs'),
+    { encoding: 'utf-8' }
   );
 
   var template = handlebars.compile(overview);
