@@ -1,0 +1,188 @@
+body {
+  margin: 0;
+}
+
+.eslint-report {
+  font-family: "Helvetica Neue", sans-serif;
+  font-size: 14px;
+  padding: 20px 40px;
+}
+
+.eslint-report h1 {
+  border-bottom: 1px solid #ddd;
+  line-height: 1;
+  padding-bottom: 12px;
+}
+
+.eslint-report h2 {
+  padding-bottom: 9px;
+  line-height: 1;
+  margin-top: 24px;
+  margin-bottom: 9px;
+}
+
+.eslint-report h3 {
+  line-height: 1;
+  margin-top: 0;
+}
+
+.eslint-report a {
+  text-decoration: none;
+}
+
+.eslint-report table {
+  border-spacing: 0;
+  border-collapse: collapse;
+}
+
+.toggle-all-link {
+  font-size: 14px;
+}
+
+.report-table {
+  font-size: 14px;
+  min-width: 800px;
+  border: 1px solid #e6e6e6;
+  margin: 10px;
+}
+
+.report-table thead {
+  background-color: #eee;
+}
+
+.report-table th {
+  text-align: left;
+  vertical-align: middle;
+}
+
+.report-table th,
+.report-table td {
+  padding: 4px 9px;
+  border: 1px solid #ccc;
+}
+
+.report-table td {
+  line-height: 1.5;
+  vertical-align: top;
+}
+
+.report-table .error-col {
+  width: 41px;
+}
+
+.report-table .warning-col {
+  width: 63px;
+}
+
+.report-table .toggle-link {
+  display: block;
+}
+
+.report-table .danger td {
+  background-color: rgba(242, 222, 222, 0.8);
+}
+
+.report-table .danger:hover td {
+  background-color: rgba(242, 222, 222, 1);
+}
+
+.report-table .warning td {
+  background-color: rgba(252, 248, 227, 0.8);
+}
+
+.report-table .warning:hover td {
+  background-color: rgba(252, 248, 227, 1);
+}
+
+.report-table .success td {
+  background-color: rgba(223, 240, 216, 0.8);
+}
+
+.report-table .success:hover td {
+  background-color: rgba(223, 240, 216, 1);
+}
+
+.table-wrapper {
+  display: flex;
+  justify-content: flex-start;
+  width: 500px;
+  align-items: flex-end;
+}
+
+.table-wrapper.occurances {
+  align-items: flex-start;
+}
+
+.table-column {
+  flex: 1;
+  margin: 10px;
+}
+
+.summary-table {
+  width: 100%;
+}
+
+.summary-table a {
+  display: block;
+}
+
+.summary-table td {
+  padding: 4px 9px;
+}
+
+.summary-table td:last-child {
+  text-align: right;
+}
+
+.summary-table tfoot td {
+  border-top: 2px solid #666;
+  font-weight: bold;
+}
+
+.details-row.hidden {
+  display: none;
+}
+
+.details-table {
+  font-size: 12px;
+  width: 100%;
+  margin-bottom: 15px;
+}
+
+.details-table td {
+  border: 0;
+  padding: 1px 6px;
+}
+
+.details-table td:first-child {
+  padding-left: 0;
+}
+
+.details-table .location-col {
+  width: 25px;
+}
+
+.details-table .rule-col {
+  white-space: nowrap;
+  width: 100px;
+}
+
+.details-table .rule-col a {
+  display: block;
+}
+
+.details-table .rule-col a:hover {
+  text-decoration: underline;
+}
+
+.details-table .severity-col {
+  width: 45px;
+}
+
+.details-table .msg-danger .severity-col {
+  color: #900;
+}
+
+.details-table .msg-warning .severity-col {
+  color: #f90;
+}

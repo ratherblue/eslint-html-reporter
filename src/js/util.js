@@ -5,6 +5,8 @@
 'use strict';
 
 var ciUtil = require('./ci-util.js');
+var execSync = require('child_process').execSync;
+var path = require('path');
 
 var errorOccurances = [];
 var warningOccurances = [];
@@ -99,6 +101,15 @@ var addWarningOccurance = function(key) {
   }
 };
 
+var compileLess = function() {
+  var thing = path.join(__dirname, '..', '..', 'node_modules', 'less', 'bin', 'lessc');
+  var filething = path.join(__dirname, '..', 'less', 'styles.less');
+
+  var blah = execSync(thing + ' ' + filething);
+
+  return String(blah);
+};
+
 /**
  * Summarize reported data
  * @param {object} results - Data to parse with Handlebars template
@@ -184,6 +195,7 @@ exports.summarizeData = function(results, fullReport, ciTool) {
     fullReport: fullReport,
     errorOccurances: errorOccurances,
     warningOccurances: warningOccurances,
+    styles: compileLess(),
     pageTitle: (fullReport ? 'ESLint Results' : 'ESLint Results (lite)')
   };
 };
