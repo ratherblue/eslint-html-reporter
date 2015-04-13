@@ -31,8 +31,7 @@
   },
   "homepage": "https://github.com/edendramis/eslint-html-reporter",
   "dependencies": {
-    "handlebars": "^3.0.1",
-    "less": "^2.5.0"
+    "handlebars": "^3.0.1"
   },
   "devDependencies": {
     "chai": "^2.2.0",
