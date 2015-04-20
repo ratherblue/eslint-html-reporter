@@ -2,15 +2,14 @@
  * @fileoverview ESLint HTML 'Lite' reporter
  * @author Evangelia Dendramis
  */
-'use strict';
 
-var util = require('./src/js/util');
-var hbsUtil = require('./src/js/hbs-util');
+var LintReporter = require('./src/js/lint-reporter');
+var templateUtils = require('hairballs').templateUtils;
 
 
 module.exports = function(results) {
+  var lintReporter = new LintReporter();
+  var data = lintReporter.runReport(results, false, false);
 
-  var data = util.summarizeData(results, false);
-
-  return hbsUtil.applyTemplates(data);
+  return templateUtils.applyTemplates(data);
 };
