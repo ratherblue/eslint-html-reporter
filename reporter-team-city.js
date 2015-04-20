@@ -1,16 +1,15 @@
 /**
- * @fileoverview ESLint HTML reporter with Team City integration
+ * @fileoverview ESLint HTML reporter
  * @author Evangelia Dendramis
  */
-'use strict';
 
-var util = require('./src/js/util');
-var hbsUtil = require('./src/js/hbs-util');
+var LintReporter = require('./src/js/lint-reporter');
+var templateUtils = require('hairballs').templateUtils;
 
 
 module.exports = function(results) {
+  var lintReporter = new LintReporter();
+  var data = lintReporter.runReport(results, true, true);
 
-  var data = util.summarizeData(results, true, 'teamCity');
-
-  return hbsUtil.applyTemplates(data);
+  return templateUtils.applyTemplates(data);
 };
