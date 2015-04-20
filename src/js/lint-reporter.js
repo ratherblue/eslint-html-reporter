@@ -94,10 +94,10 @@ function LintReporter() {
    */
   this.runReport = function(data, fullReport, useTeamCityReport) {
 
-    this.summarizeData(data);
-
     this.fullReport = fullReport;
     this.useTeamCityReport = useTeamCityReport;
+
+    this.summarizeData(data);
 
     hairballs.files.sort(hairballs.sortErrors);
 
