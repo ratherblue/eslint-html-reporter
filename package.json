@@ -31,7 +31,7 @@
   },
   "homepage": "https://github.com/edendramis/eslint-html-reporter",
   "dependencies": {
-    "hairballs": "0.0.5"
+    "hairballs": "0.0.7"
   },
   "devDependencies": {
     "chai": "^2.2.0",
