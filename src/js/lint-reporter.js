@@ -1,6 +1,5 @@
 /**
  * @fileoverview SCSS Lint HTML reporter
- * @author Evangelia Dendramis
  */
 
 
