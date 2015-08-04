@@ -3,7 +3,7 @@ env:
 
 rules:
   indent: [2, 2]
-  no-spaced-func: [2, "never"]
+  no-spaced-func: [2]
   space-before-function-paren: [2, "never"]
   valid-jsdoc: [2, { "prefer": { "return": "returns" }}]
   space-after-keywords: [2, "always"]
