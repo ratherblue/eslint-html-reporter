@@ -1,6 +1,5 @@
 /**
  * @fileoverview ESLint HTML 'Lite' reporter
- * @author Evangelia Dendramis
  */
 
 var LintReporter = require('./src/js/lint-reporter');
