@@ -56,4 +56,4 @@ gulp.src(['js/**/*.js'])
 
 ## License
 
-[MIT](https://github.com/edendramis/eslint-html-reporter/blob/master/LICENSE) © Evangelia Dendramis
+[MIT](https://github.com/edendramis/eslint-html-reporter/blob/master/LICENSE) 
