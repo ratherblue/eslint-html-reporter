@@ -6,9 +6,7 @@ Features:
 * Generates an HTML page with a summary of all linted files and their errors
 * Choice between detailed and "lite" output
 * Optional integration with TeamCity's console
-
-Upcoming features:
-* Summary of 5 most-common errors and warnings
+* Shows summary of all errors and warnings so you can easily identify top linting issues
 
 
 ## Installation
