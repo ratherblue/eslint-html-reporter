@@ -1,3 +1,9 @@
+# 0.4.14 - August 6, 2015
+
+Misc
+
+* Updated to latest version of hairballs (Changed `overflow: scroll` to `overflow-y: auto` to only show scroll bars when necessary)
+
 # 0.4.13 - August 6, 2015
 
 Bug fixes
