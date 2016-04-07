@@ -1,4 +1,10 @@
-# ESLint HTML Reporter [![Build Status](https://travis-ci.org/ratherblue/eslint-html-reporter.svg?branch=master)](https://travis-ci.org/ratherblue/eslint-html-reporter)
+# ESLint HTML Reporter
+
+[![Build Status](https://img.shields.io/travis/ratherblue/eslint-html-reporter.svg?style=flat-square)](https://travis-ci.org/ratherblue/eslint-html-reporter)
+[![Coverage Status](https://img.shields.io/coveralls/ratherblue/eslint-html-reporter.svg?style=flat-square)](https://coveralls.io/r/ratherblue/eslint-html-reporter)
+[![License](https://img.shields.io/github/license/ratherblue/eslint-html-reporter.svg?style=flat-square)](https://github.com/ratherblue/eslint-html-reporter/blob/master/LICENSE)
+[![Dependencies](https://img.shields.io/david/ratherblue/eslint-html-reporter.svg?style=flat-square)](https://david-dm.org/ratherblue/eslint-html-reporter)
+[![devDependency Status](https://img.shields.io/david/dev/ratherblue/eslint-html-reporter.svg?style=flat-square)](https://david-dm.org/ratherblue/eslint-html-reporter#info=devDependencies&view=table)
 
 HTML Reporter for ESLint. Please report bugs to [https://github.com/ratherblue/eslint-html-reporter/issues](https://github.com/ratherblue/eslint-html-reporter/issues)
 
