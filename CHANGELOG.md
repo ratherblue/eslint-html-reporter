@@ -1,3 +1,9 @@
+# 0.5.2 - April 7, 2016
+
+Misc
+
+* Update status badges
+
 # 0.5.1 - April 7, 2016
 
 Misc
