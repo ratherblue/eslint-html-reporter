@@ -28,13 +28,13 @@
   },
   "homepage": "https://github.com/ratherblue/eslint-html-reporter",
   "dependencies": {
-    "hairballs": "0.0.9"
+    "hairballs": "0.1.0"
   },
   "devDependencies": {
-    "chai": "3.2.0",
-    "coveralls": "2.11.3",
-    "istanbul": "0.3.17",
-    "mocha": "2.2.5",
-    "mocha-lcov-reporter": "0.0.2"
+    "chai": "3.5.0",
+    "coveralls": "2.11.9",
+    "istanbul": "0.4.3",
+    "mocha": "2.4.5",
+    "mocha-lcov-reporter": "1.2.0"
   }
 }
