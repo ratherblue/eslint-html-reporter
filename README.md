@@ -1,6 +1,6 @@
-# ESLint HTML Reporter [![Build Status](https://travis-ci.org/edendramis/eslint-html-reporter.svg?branch=master)](https://travis-ci.org/edendramis/eslint-html-reporter)
+# ESLint HTML Reporter [![Build Status](https://travis-ci.org/ratherblue/eslint-html-reporter.svg?branch=master)](https://travis-ci.org/ratherblue/eslint-html-reporter)
 
-HTML Reporter for ESLint. Please report bugs to [https://github.com/edendramis/eslint-html-reporter/issues](https://github.com/edendramis/eslint-html-reporter/issues)
+HTML Reporter for ESLint. Please report bugs to [https://github.com/ratherblue/eslint-html-reporter/issues](https://github.com/ratherblue/eslint-html-reporter/issues)
 
 Features:
 * Generates an HTML page with a summary of all linted files and their errors
@@ -54,4 +54,4 @@ gulp.src(['js/**/*.js'])
 
 ## License
 
-[MIT](https://github.com/edendramis/eslint-html-reporter/blob/master/LICENSE) 
+[MIT](https://github.com/ratherblue/eslint-html-reporter/blob/master/LICENSE)
