@@ -9,7 +9,7 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/edendramis/eslint-html-reporter"
+    "url": "https://github.com/ratherblue/eslint-html-reporter"
   },
   "keywords": [
     "eslint",
@@ -17,16 +17,16 @@
     "teamcity"
   ],
   "author": {
-    "email": "edendramis@gmail.com"
+    "email": "ratherblue@gmail.com"
   },
   "license": {
     "type": "MIT",
-    "url": "https://github.com/edendramis/eslint-html-reporter/blob/master/LICENSE"
+    "url": "https://github.com/ratherblue/eslint-html-reporter/blob/master/LICENSE"
   },
   "bugs": {
-    "url": "https://github.com/edendramis/eslint-html-reporter/issues"
+    "url": "https://github.com/ratherblue/eslint-html-reporter/issues"
   },
-  "homepage": "https://github.com/edendramis/eslint-html-reporter",
+  "homepage": "https://github.com/ratherblue/eslint-html-reporter",
   "dependencies": {
     "hairballs": "0.0.9"
   },
