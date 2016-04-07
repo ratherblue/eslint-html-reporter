@@ -1,3 +1,19 @@
+# 0.5.1 - April 7, 2016
+
+Misc
+
+* Update changelog
+* Update nodejs versions in travis build
+
+
+# 0.5.0 - April 7, 2016
+
+Misc
+
+* Updated to latest version of hairballs
+* Updated dev dependencies to latest versions
+
+
 # 0.4.14 - August 6, 2015
 
 Misc
