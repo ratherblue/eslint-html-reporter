@@ -29,7 +29,7 @@ function LintReporter() {
       file.warnings++;
     }
 
-    hairballs.updateOccurance(message.ruleId, message.severity, ruleUrl);
+    hairballs.updateOccurrence(message.ruleId, message.severity, ruleUrl);
 
     file.messages.push(message);
 
@@ -100,16 +100,16 @@ function LintReporter() {
 
     hairballs.files.sort(hairballs.sortErrors);
 
-    hairballs.errorOccurances.sort(hairballs.sortOccurances);
-    hairballs.warningOccurances.sort(hairballs.sortOccurances);
+    hairballs.errorOccurrences.sort(hairballs.sortOccurrences);
+    hairballs.warningOccurrences.sort(hairballs.sortOccurrences);
 
     return {
       fileSummary: hairballs.fileSummary,
       alertSummary: hairballs.alertSummary,
       files: hairballs.files,
       fullReport: this.fullReport,
-      errorOccurances: hairballs.errorOccurances,
-      warningOccurances: hairballs.warningOccurances,
+      errorOccurrences: hairballs.errorOccurrences,
+      warningOccurrences: hairballs.warningOccurrences,
       pageTitle: 'ESLint Results' + (this.fullReport ? '' : ' (lite)')
     };
   };

@@ -31,3 +31,5 @@ node_modules
 
 # test output
 test-report.html
+
+.idea/
