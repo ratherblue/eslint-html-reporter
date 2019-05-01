@@ -1,6 +1,6 @@
 {
   "name": "eslint-html-reporter",
-  "version": "0.7.1",
+  "version": "0.7.2",
   "description": "HTML Reporter for ESLint",
   "main": "index.js",
   "engine": "node >= 0.12.0",
@@ -28,13 +28,13 @@
   },
   "homepage": "https://github.com/ratherblue/eslint-html-reporter",
   "dependencies": {
-    "hairballs": "0.2.0"
+    "hairballs": "^0.3.0"
   },
   "devDependencies": {
-    "chai": "3.5.0",
-    "coveralls": "2.11.9",
-    "istanbul": "0.4.3",
-    "mocha": "2.4.5",
-    "mocha-lcov-reporter": "1.2.0"
+    "chai": "4.2.0",
+    "coveralls": "3.0.3",
+    "istanbul": "0.4.5",
+    "mocha": "6.1.4",
+    "mocha-lcov-reporter": "1.3.0"
   }
 }
