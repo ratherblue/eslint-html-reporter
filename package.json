@@ -28,7 +28,7 @@
   },
   "homepage": "https://github.com/ratherblue/eslint-html-reporter",
   "dependencies": {
-    "hairballs": "^0.3.0"
+    "hairballs": "^0.3.1"
   },
   "devDependencies": {
     "chai": "4.2.0",
