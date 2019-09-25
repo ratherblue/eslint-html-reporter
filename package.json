@@ -1,6 +1,6 @@
 {
   "name": "eslint-html-reporter",
-  "version": "0.7.3",
+  "version": "0.7.4",
   "description": "HTML Reporter for ESLint",
   "main": "index.js",
   "engine": "node >= 0.12.0",
@@ -28,7 +28,8 @@
   },
   "homepage": "https://github.com/ratherblue/eslint-html-reporter",
   "dependencies": {
-    "hairballs": "^0.3.1"
+    "hairballs": "^0.3.2",
+    "handlebars": "^4.3.1"
   },
   "devDependencies": {
     "chai": "4.2.0",
